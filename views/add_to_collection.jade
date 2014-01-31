@@ -1,0 +1,68 @@
+div.lightbox_form_container
+  h3 Add to collection
+  img.add_image
+  div.lightbox_form
+    form(role="form" id="add_to_collection")
+      div.form-group
+        label(for='collection') Collection
+        select.form-control(name='collection')
+          if collections
+            each collection in collections
+              option= collection
+          option(name='new') New collection
+      div.form-group(class='new_collection_name' name='name' style='display:none')
+        label(for='collection_name') Name
+        input.form-control(type="text" name="collection_name" placeholder="Name")
+      button.btn.btn-default(type="submit") Submit
+  div(style="clear:both")
+script.
+
+  $('.add_image').attr('src', $('.lightbox_image').attr('src'));
+
+  $("#add_to_collection").submit(function(e) {
+    e.preventDefault();
+    
+    var postDataArray = $(this).serializeArray();
+    var postData = {};
+    
+    for (var i = 0; i < postDataArray.length; i++) {
+      postData[postDataArray[i].name] = postDataArray[i].value;
+    }
+    
+    if(postData.collection_name) {
+      postData.collection = postData.collection_name;
+    }
+    console.log(postData);
+    
+    var url = '/collections/' + postData.collection + '/add/image/' + '#{id}';
+    $.ajax(
+      {
+        type : 'POST',
+        url : url, 
+        success : function(data) {
+          $('#add_to_collection').remove();
+          $('.lightbox_form').append('<p>' + data + '</p>');
+        }
+      }
+    );
+  });
+  
+  $("#add_to_collection").on("change", function() {
+    manageSelection();
+  });
+  
+  manageSelection();
+  
+  function manageSelection() {
+    var selection = $("#add_to_collection option:selected").text();
+    if (selection === "New collection") {
+      $('.new_collection_name').css('display', 'block');
+      var new_top_margin = -($('.lightbox').height() / 2) + 'px';
+      $('.lightbox').css('margin-top', new_top_margin);
+    }
+    else {
+      $('.new_collection_name').css('display', 'none');
+      var new_top_margin = -($('.lightbox').height() / 2) + 'px';
+      $('.lightbox').css('margin-top', new_top_margin);
+    }
+  }

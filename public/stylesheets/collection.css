@@ -1,0 +1,7 @@
+td.picture img {
+  width:100px;
+}
+
+a.delete_collection_image {
+  cursor: pointer;
+}

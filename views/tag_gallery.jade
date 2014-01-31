@@ -1,0 +1,12 @@
+extends gallery
+
+block nav
+  a(href='/search/tags') Back to search
+
+block script
+  script.
+    var options = {
+      type: 'tags',
+      tags: ['#{tags[0]}', '#{tags[1]}']
+    }
+    gallery($('.data'), options);

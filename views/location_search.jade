@@ -1,0 +1,61 @@
+extends layout
+
+block head
+  script(src='/javascripts/imageGetter.js')
+  script(src='/javascripts/gallery.js')
+  script(src='/javascripts/lightbox.js')
+  link(rel='stylesheet' href='/stylesheets/lightbox.css')
+
+block content
+  header
+    h1= title
+    a(href='/') Back home
+  div.content
+    form(role="form" id="locationsearch")
+      div.form-group
+        label(for="query") Venue
+        input.form-control(type="text" name="query" placeholder="Enter the name of a venue you'd like to search for")
+      div.form-group
+        label(for="near") Near
+        input.form-control(type="text" name="near" placeholder="Enter a location around which to search (e.g. \"New York, NY\")")
+      button.btn.btn-default(type="submit") Submit
+    .results
+  script.
+    $("#locationsearch").submit(function(e) {
+      e.preventDefault();
+      var postDataArray = $(this).serializeArray();
+      var postData = {};
+      
+      for (var i = 0; i < postDataArray.length; i++) {
+        postData[postDataArray[i].name] = postDataArray[i].value;
+      }
+      
+      var url = 'https://api.foursquare.com/v2/venues/search?query=' + postData.query + "&near=" + postData.near + "&client_id=P0HR5FMYTVE5JJU4TAZTW3S201Q0M04RPLUHVQVDGIWGNGCC&client_secret=MAR4DA0UDHDF3IOHBEPFKZM2Z1PK1LOMEJS2LNDYKIL0WI0O&v=20140105"; 
+      console.log(url);
+      
+      
+      
+     $.ajax(
+        {
+          type : 'GET',
+          url : url,
+          dataType : 'jsonp',
+          success : function(data) {
+            $('.results').children().remove();
+            $('.results').append("<h3>Results</h3><ul></ul>");
+            for (var i = 0; i < data.response.venues.length; i++) {
+              var htmlToAdd = "<li>";
+              htmlToAdd += "<a href='/images/location/" + data.response.venues[i].id + "'>";
+              htmlToAdd += data.response.venues[i].name + "</a>";
+              htmlToAdd += "</li>";
+              
+              console.log(htmlToAdd);
+            
+              $(".results ul").append(htmlToAdd);
+            }
+            $('html,body').animate({ scrollTop:$('.results').offset().top }, 500);
+          }
+        }
+      ); 
+    });
+  

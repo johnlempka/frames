@@ -1,0 +1,19 @@
+extends gallery
+
+block nav
+  a(href='/') Back home
+
+block script
+  script.
+    var url = '/images/collections/#{id}/json';
+    $.ajax({
+      type : 'GET',
+      url : url,
+      success : function (data) {
+        var options = {
+          type: 'list',
+          list: data
+        }
+        gallery($('.data'), options);
+      }
+    });

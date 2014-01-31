@@ -1,0 +1,17 @@
+extends layout
+
+block head
+  script(src='/javascripts/imageGetter.js')
+  script(src='/javascripts/gallery.js')
+  script(src='/javascripts/lightbox.js')
+  link(rel='stylesheet' href='/stylesheets/lightbox.css')
+
+block content
+  header
+    h1= title
+  .content
+    ul
+      li
+        a(href='/search/tags') Search by tag
+      li
+        a(href='/search/locations') Search by location

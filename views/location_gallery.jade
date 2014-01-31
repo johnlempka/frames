@@ -1,0 +1,27 @@
+extends gallery
+
+block nav
+  a(href='/search/locations') Back to search
+
+block script
+  script.
+    var igLocationApiUrl = 'https://api.instagram.com/v1/locations/search?'
+    igLocationApiUrl += 'foursquare_v2_id=' + '#{location}';
+    igLocationApiUrl += '&client_id=22e2598de33c4ee580a285d661123ad3';
+  
+    console.log(igLocationApiUrl);
+  
+    $.ajax(
+        {
+          type : 'GET',
+          url : igLocationApiUrl, 
+          dataType : 'jsonp',
+          success : function(data) {
+            var options = {
+              type: 'location',
+              location_id: data.data[0].id
+            }        
+            gallery($('.data'), options);
+          }
+        }
+      );

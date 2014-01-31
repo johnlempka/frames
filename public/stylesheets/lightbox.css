@@ -1,0 +1,92 @@
+
+.overlay {
+  position: fixed;
+  background: rgba(0,0,0,.5);
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index: 5;
+  display:none;
+}
+
+.lightbox {
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  position: fixed;
+  z-index: 6;
+  display:none;
+  box-shadow: 0 5px 15px rgba(0,0,0,.9);
+}
+
+.lightbox_image {
+  width: 500px;
+  display: block;
+}
+
+.lightbox_form_container {
+  margin: 20px;
+}
+
+.lightbox_form {
+  margin-left: 120px;
+}
+
+.add_image {
+  width:100px;
+  float:left;
+}
+
+a.view_on_insta, a.add_to_collection {
+  display:block;
+  background: #000;
+  color: #fff;
+  text-decoration:none;
+  font-size:12px;
+  text-transform:uppercase;
+  padding: 4px;
+  text-align:center;
+  cursor: pointer;
+}
+
+p.photo_author {
+  height: 20px;
+  position:absolute;
+  margin-top:-20px;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  text-shadow: 1px 1px 0 #000;
+  font-size: 12px;
+  padding: 0 4px;
+  line-height: 20px;
+}
+
+p.photo_author a {
+  font-weight:bold;
+  color: #fff;
+  text-decoration:none;
+}
+
+ 
+  @media (min-width: 700px) and (max-width:900px) { 
+
+  }
+  
+  @media (min-width: 500px) and (max-width:700px){
+
+  }
+  @media (max-width:500px) {
+    .lightbox,
+    .lightbox_image {
+      width:95%;
+    }
+    
+    .overlay {
+    }
+
+  }
+  */

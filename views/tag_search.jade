@@ -1,0 +1,35 @@
+extends layout
+
+block head
+  script(src='/javascripts/imageGetter.js')
+  script(src='/javascripts/gallery.js')
+  script(src='/javascripts/lightbox.js')
+  link(rel='stylesheet' href='/stylesheets/lightbox.css')
+
+block content
+  header
+    h1= title
+    a(href='/') Back home
+  div.content
+    form(role="form" id="tagsearch")
+      div.form-group
+        label(for="tag1") First tag
+        input.form-control(type="text" name="tag1" placeholder="Enter the name of the first tag you'd like to search for")
+      div.form-group
+        label(for="tag2") Second tag
+        input.form-control(type="text" name="tag2" placeholder="Enter the name of the second tag you'd like to search for")
+      button.btn.btn-default(type="submit") Submit
+    .results
+  script.
+    $("#tagsearch").submit(function(e) {
+      e.preventDefault();
+      var postDataArray = $(this).serializeArray();
+      var postData = {};
+      
+      for (var i = 0; i < postDataArray.length; i++) {
+        postData[postDataArray[i].name] = postDataArray[i].value;
+      }
+      
+      window.location.href = '/images/tags/' + postData.tag1 + '/' + postData.tag2;
+    });
+  
