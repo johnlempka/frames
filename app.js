@@ -13,15 +13,12 @@ var redisURL = url.parse(process.env.REDISCLOUD_URL);
 
 console.log("Redis url: process.env.REDISCLOUD_URL");
 
-var rclient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
 if (redisURL.auth) {
   rclient.auth(redisURL.auth.split(":")[1]);
 }
 
 var options = {title: 'frames'};
-
-var client = redis.createClient();
-
 var app = express();
 
 // all environments
