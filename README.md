@@ -9,4 +9,4 @@ The project was designed as a backend for a project I've been working on, to cur
 
 Frames stores everything in redis.
 
-You can see a sample gallery -- Mike Kelley at MoMA PS1 -- here.
+You can see the app live [here](http://framesss.herokuapp.com), and a sample gallery -- Mike Kelley at MoMA PS1 -- [here](http://framesss.herokuapp.com/images/collections/mike%20kelley).
